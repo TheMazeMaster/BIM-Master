@@ -7,7 +7,7 @@ const globalDivisionCount = 132; // The full 360° wheel is divided into 132 equ
 
 /**
  * TIER CONTROL SYSTEM
- * Each tier (T0 - T6) is defined by a config object. 
+ * Each tier (T0 - T6) is defined by a config object.
  * Only outerRadius is set per tier; innerRadius is inferred from the previous tier.
  */
 const tiers = [

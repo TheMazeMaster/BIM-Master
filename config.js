@@ -142,7 +142,7 @@ const tiers = [
     outerRadius: 220,
     rotationLocked: false,
     divisionWeights: Array(33).fill(4),
-    labelList: [ 
+    labelList: [
       "Aggression", "Confrontation", "Dominance", "Defensiveness", "Retaliation",
     "Reactive Evasion", "Chaotic Engagement", "Defensive Provocation",
     "Withdrawal", "Avoidance", "Evasion",
