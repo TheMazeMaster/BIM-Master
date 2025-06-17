@@ -207,7 +207,7 @@ function drawRadialTier(svg, config, tierIndex, cx, cy, rotationOffset, defs) {
       text.setAttribute('fill', config.labelStyle.color || '#000');
       text.setAttribute('text-anchor', 'middle');
       text.setAttribute('dominant-baseline', 'middle');
-      text.setAttribute('transform', `rotate(${midAngle}, ${labelPos.x}, ${labelPos.y})`);
+      text.setAttribute('transform', `rotate(${midAngle -90}, ${labelPos.x}, ${labelPos.y})`);
       text.textContent = config.labelList[i] || '';
       svg.appendChild(text);
     }
