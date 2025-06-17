@@ -56,7 +56,6 @@ function setupT6Buttons() {
 }
 
 // === TIER RENDERING FUNCTIONS ===
-// === TIER RENDERING FUNCTIONS ===
 function drawTier(svg, tierConfig, tierIndex, cx, cy, rotationOffset, defs) {
   // 1) Respect the 'visible' flag (instead of the old 'show')
   if (!tierConfig.visible) return;
