@@ -155,12 +155,8 @@ function drawRing(svg, config, cx, cy) {
   path.setAttribute('d', ringPath(cx, cy, config.innerRadius, config.outerRadius));
   const fill = config.fill?.startColor || '#fff';
   path.setAttribute('fill', fill);
-  if (config.stroke?.show) {
-    path.setAttribute('stroke', config.stroke.color || '#000');
-    path.setAttribute('stroke-width', config.stroke.width || 0.25);
-  } else {
-    path.setAttribute('stroke', 'none');
-  }
+  // Stroke lines are drawn separately by drawBoundaries; avoid radial seams here
+  path.setAttribute('stroke', 'none');
   svg.appendChild(path);
 }
 
