@@ -69,7 +69,7 @@ const tiers = [
       startColor: "#ffffff",
       endColor: "#ffffff"
     },
-    stroke: { show: false },
+    stroke: { show: true, width: 1.0, color: "#000000" },
     showLabels: true,
     visible: true
   },
