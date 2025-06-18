@@ -198,15 +198,21 @@ function drawRadialTier(svg, config, tierIndex, cx, cy, rotationOffset, defs) {
     // Optional label (centered along arc)
     if (config.labelList) {
       const midAngle = (startAngle + endAngle) / 2;
-      const r = (inner + outer) / 2;
-      const labelPos = polarToCartesian(cx, cy, r + (config.labelStyle.offset || 0), midAngle);
+      let r = (inner + outer) / 2;
+      if (config.labelStyle.anchor === 'start') {
+        r = inner + (config.labelStyle.offset || 0);
+      } else {
+        r = r + (config.labelStyle.offset || 0);
+      }
+      const labelPos = polarToCartesian(cx, cy, r, midAngle);
       const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
       text.setAttribute('x', labelPos.x);
       text.setAttribute('y', labelPos.y);
       text.setAttribute('font-size', config.labelStyle.fontSize || 12);
+      text.setAttribute('font-weight', config.labelStyle.fontWeight || 'normal');
       text.setAttribute('fill', config.labelStyle.color || '#000');
-      text.setAttribute('text-anchor', 'middle');
-      text.setAttribute('dominant-baseline', 'middle');
+      text.setAttribute('text-anchor', config.labelStyle.anchor || 'middle');
+      text.setAttribute('dominant-baseline', config.labelStyle.verticalAlign || 'middle');
       text.setAttribute('transform', `rotate(${midAngle -90}, ${labelPos.x}, ${labelPos.y})`);
       text.textContent = config.labelList[i] || '';
       svg.appendChild(text);
