@@ -196,7 +196,7 @@ const tiers = [
     divisionWeights: Array(132).fill(1),
     labelList: (() => {
       const mods = ["Light", "Mid", "High", "Intense"];
-      return Array(33).flatMap(() => mods);
+      return Array(33).fill(0).flatMap(() => mods);
     })(),
     labelStyle: {
       type: "radial",
