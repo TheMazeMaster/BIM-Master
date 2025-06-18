@@ -157,7 +157,7 @@ const tiers = [
     labelStyle: {
       type: "radial",
       fontSize: 6,
-      fontWeight: "normal",
+      fontWeight: "bold",
       anchor: "middle",
       verticalAlign: "middle"
     },
