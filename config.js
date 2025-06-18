@@ -200,8 +200,8 @@ const tiers = [
     })(),
     labelStyle: {
       type: "radial",
-      fontSize: 5,
-      fontWeight: "normal",
+      fontSize: 4,
+      fontWeight: "lighter",
       anchor: "middle",
       verticalAlign: "middle"
     },
