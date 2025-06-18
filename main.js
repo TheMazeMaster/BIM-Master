@@ -201,7 +201,7 @@ function drawRadialTier(svg, config, tierIndex, cx, cy, rotationOffset, defs) {
       const offset = config.labelStyle.offset || 0;
       let r;
       if (config.labelStyle.anchor === 'start') {
-        r = inner + offset;
+        r = inner + 5;
       } else if (config.labelStyle.anchor === 'end') {
         r = outer - offset;
       } else {
