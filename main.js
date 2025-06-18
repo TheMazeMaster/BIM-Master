@@ -198,11 +198,14 @@ function drawRadialTier(svg, config, tierIndex, cx, cy, rotationOffset, defs) {
     // Optional label (centered along arc)
     if (config.labelList) {
       const midAngle = (startAngle + endAngle) / 2;
-      let r = (inner + outer) / 2;
+      const offset = config.labelStyle.offset || 0;
+      let r;
       if (config.labelStyle.anchor === 'start') {
-        r = inner + (config.labelStyle.offset || 0);
+        r = inner + offset;
+      } else if (config.labelStyle.anchor === 'end') {
+        r = outer - offset;
       } else {
-        r = r + (config.labelStyle.offset || 0);
+        r = (inner + outer) / 2 + offset;
       }
       const labelPos = polarToCartesian(cx, cy, r, midAngle);
       const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
