@@ -65,10 +65,12 @@ function drawTier(svg, tierConfig, tierIndex, cx, cy, rotationOffset, defs) {
 
   // 3a) Centered text (T0)
   if (styleType === 'centered') {
+    drawCircle(svg, tierConfig, cx, cy);
     drawCenteredText(svg, tierConfig, cx, cy);
   }
   // 3b) Arc text (T1 & T2)
   else if (styleType === 'arcText') {
+    drawRing(svg, tierConfig, cx, cy);
     drawArcText(svg, tierConfig, cx, cy);
   }
   // 3c) Radial slices (T3–T6)
@@ -127,6 +129,36 @@ function drawArcText(svg, config, cx, cy) {
   const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
   text.appendChild(textPath);
   svg.appendChild(text);
+}
+
+function drawCircle(svg, config, cx, cy) {
+  const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+  circle.setAttribute('cx', cx);
+  circle.setAttribute('cy', cy);
+  circle.setAttribute('r', config.outerRadius);
+  const fill = config.fill?.startColor || '#fff';
+  circle.setAttribute('fill', fill);
+  if (config.stroke?.show) {
+    circle.setAttribute('stroke', config.stroke.color || '#000');
+    circle.setAttribute('stroke-width', config.stroke.width || 0.25);
+  } else {
+    circle.setAttribute('stroke', 'none');
+  }
+  svg.appendChild(circle);
+}
+
+function drawRing(svg, config, cx, cy) {
+  const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  path.setAttribute('d', ringPath(cx, cy, config.innerRadius, config.outerRadius));
+  const fill = config.fill?.startColor || '#fff';
+  path.setAttribute('fill', fill);
+  if (config.stroke?.show) {
+    path.setAttribute('stroke', config.stroke.color || '#000');
+    path.setAttribute('stroke-width', config.stroke.width || 0.25);
+  } else {
+    path.setAttribute('stroke', 'none');
+  }
+  svg.appendChild(path);
 }
 
 function drawRadialTier(svg, config, tierIndex, cx, cy, rotationOffset, defs) {
