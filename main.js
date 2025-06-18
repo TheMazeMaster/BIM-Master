@@ -27,6 +27,9 @@ function renderWheel() {
   if (Array.isArray(wheelConfig.overlays)) {
     drawOverlays(svg, wheelConfig.overlays, centerX, centerY, defs);
   }
+
+  // Draw tier boundary outlines last so they appear on top
+  drawBoundaries(svg, wheelConfig.tiers, centerX, centerY);
 }
 
 // === ROTATION BUTTONS ===
@@ -259,6 +262,28 @@ function drawOverlays(svg, overlays, cx, cy, defs) {
       path.setAttribute('pointer-events', 'none');
       svg.appendChild(path);
     }
+  });
+}
+
+function drawBoundaries(svg, tiers, cx, cy) {
+  tiers.forEach(tier => {
+    if (!tier.visible || !tier.stroke?.show) return;
+
+    const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    circle.setAttribute('cx', cx);
+    circle.setAttribute('cy', cy);
+    circle.setAttribute('r', tier.outerRadius);
+    circle.setAttribute('fill', 'none');
+    circle.setAttribute('pointer-events', 'none');
+
+    const strokeColor = tier.stroke.color || '#000';
+    const strokeWidth = tier.stroke.width ?? tier.stroke.normal ??
+      (wheelConfig.renderOptions?.strokeDefaults?.normal || 0.25);
+
+    circle.setAttribute('stroke', strokeColor);
+    circle.setAttribute('stroke-width', strokeWidth);
+
+    svg.appendChild(circle);
   });
 }
 
