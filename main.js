@@ -321,10 +321,11 @@ function drawOverlays(svg, overlays, cx, cy, defs) {
     }
     else if (ov.type === 'radialLines') {
       const outer = ov.radius ?? Math.max(...wheelConfig.tiers.map(t => t.outerRadius));
+      const inner = ov.innerRadius || 0;
       const strokeWidth = ov.width ?? (wheelConfig.renderOptions?.strokeDefaults?.wide || 1);
 
       (ov.angles || []).forEach(angle => {
-        const start = polarToCartesian(cx, cy, 0, angle);
+        const start = polarToCartesian(cx, cy, inner, angle);
         const end = polarToCartesian(cx, cy, outer, angle);
         const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
         line.setAttribute('x1', start.x);
