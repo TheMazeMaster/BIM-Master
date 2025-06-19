@@ -42,7 +42,7 @@ const tiers = [
     },
     stroke: {
       show: true,
-      width: 1.0,
+      width: renderOptions.strokeDefaults.wide,
       color: "#000000"
     },
     showLabels: true,
@@ -69,7 +69,7 @@ const tiers = [
       startColor: "#ffffff",
       endColor: "#ffffff"
     },
-    stroke: { show: true, width: 1.0, color: "#000000" },
+    stroke: { show: true, width: renderOptions.strokeDefaults.wide, color: "#000000" },
     showLabels: true,
     visible: true
   },
@@ -94,7 +94,7 @@ const tiers = [
       startColor: "#ffffff",
       endColor: "#ffffff"
     },
-    stroke: { show: false },
+    stroke: { show: true, width: renderOptions.strokeDefaults.wide },
     showLabels: true,
     visible: true
   },
@@ -127,8 +127,7 @@ const tiers = [
     },
     stroke: {
       show: true,
-      normal: 0.25,
-      wide: 1.0,
+      width: renderOptions.strokeDefaults.wide,
       every: 1,
       includeFirst: true
     },
@@ -179,6 +178,7 @@ const tiers = [
     },
     stroke: {
       show: true,
+      width: renderOptions.strokeDefaults.wide,
       normal: 0.25,
       wide: 1.0,
       every: 4,
@@ -213,6 +213,7 @@ const tiers = [
     },
     stroke: {
       show: true,
+      width: renderOptions.strokeDefaults.wide,
       normal: 0.25,
       wide: 1.0,
       every: 4,
@@ -245,6 +246,7 @@ const tiers = [
     },
     stroke: {
       show: true,
+      width: renderOptions.strokeDefaults.wide,
       normal: 0.25,
       wide: 1.0,
       every: 4,
