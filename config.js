@@ -289,6 +289,13 @@ const overlays = [
     radiusRange: [120, 500],
     from: "#ffffff00",
     to: "#00000033"
+  },
+  {
+    type: "radialLines",
+    angles: t4DivisionAngles,
+    innerRadius: tiers[5].innerRadius,
+    radius: tiers[6].outerRadius,
+    color: "#000000"
   }
 ];
 

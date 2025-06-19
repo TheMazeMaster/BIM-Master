@@ -222,7 +222,8 @@ function drawRadialTier(svg, config, tierIndex, cx, cy, rotationOffset, defs) {
       segmentFill = config.fill.colors[i];
     }
     path.setAttribute('fill', segmentFill);
-    path.setAttribute('stroke', config.stroke?.show ? '#000' : 'none');
+    // Slice outlines are drawn separately; remove stroke from individual paths
+    path.setAttribute('stroke', 'none');
 
     const normalWidth = config.stroke?.normal ??
       (wheelConfig.renderOptions?.strokeDefaults?.normal || 0.25);
