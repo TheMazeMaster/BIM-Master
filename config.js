@@ -36,7 +36,7 @@ const renderOptions = {
   },
   fontDefaults: {
     fontFamily: "sans-serif"
-  }
+  },
 };
 
 /**
@@ -288,8 +288,16 @@ const overlays = [
     type: "radialGradient",
     radiusRange: [120, 500],
     from: "#ffffff00",
-    to: "#00000033"
-  }
+    to: "#00000033",
+  },
+  // Example radialLines overlay
+  // {
+  //   type: "radialLines",
+  //   angles: [0, 90, 180, 270],
+  //   radius: 500,
+  //   innerRadius: 120,
+  //   color: "#000000"
+  // }
 ];
 
 /**

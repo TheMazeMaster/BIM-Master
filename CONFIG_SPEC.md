@@ -73,3 +73,6 @@ const overlays = [
     to: "#00000033"
   }
 ];
+
+// `radialLines` overlays draw straight lines from `innerRadius` to `radius`
+// at each angle provided. `innerRadius` defaults to 0 if omitted.
