@@ -2,6 +2,29 @@
 
 const globalDivisionCount = 132;
 
+// Helper: Convert a list of weights into an array of cumulative angles
+// matching the global division count. This is used so tiers sharing
+// subdivisions can align perfectly without manually redefining angles.
+function weightsToAngles(weights) {
+  const step = 360 / globalDivisionCount;
+  const angles = [];
+  let index = 0;
+  weights.forEach(weight => {
+    for (let i = 0; i < weight; i++) {
+      angles.push(index * step);
+      index++;
+    }
+  });
+  return angles;
+}
+
+// Base weights for T4 (33 segments × 4 divisions)
+const t4Weights = Array(33).fill(4);
+
+// Derive the starting angle of each of the 132 global divisions from T4
+// so deeper tiers can share the exact boundary positions.
+const t4DivisionAngles = weightsToAngles(t4Weights);
+
 const renderOptions = {
   rotationStep: 30,
   rotationEnabled: true,
@@ -140,7 +163,7 @@ const tiers = [
     innerRadius: 120,
     outerRadius: 220,
     rotationLocked: false,
-    divisionWeights: Array(33).fill(4),
+    divisionWeights: t4Weights,
     labelList: [
       "Aggression", "Confrontation", "Dominance", "Defensiveness", "Retaliation",
     "Reactive Evasion", "Chaotic Engagement", "Defensive Provocation",
@@ -193,7 +216,7 @@ const tiers = [
     innerRadius: 220,
     outerRadius: 250,
     rotationLocked: false,
-    divisionWeights: Array(132).fill(1),
+    divisionWeights: t4DivisionAngles.map(() => 1),
     labelList: (() => {
       const mods = ["Light", "Mid", "High", "Intense"];
       return Array(33).fill(0).flatMap(() => mods);
@@ -228,7 +251,7 @@ const tiers = [
     innerRadius: 250,
     outerRadius: 500,
     rotationLocked: false,
-    divisionWeights: Array(132).fill(1),
+    divisionWeights: t4DivisionAngles.map(() => 1),
     labelListSource: "quotes",
     availableSources: ["quotes", "emotion", "tone", "behavior", "thriveCounter"],
     labelStyle: {
