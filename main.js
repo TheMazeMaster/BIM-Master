@@ -236,6 +236,7 @@ function drawRadialTier(svg, config, tierIndex, cx, cy, rotationOffset, defs) {
     }
 
     path.setAttribute('stroke-width', strokeWidth);
+    path.setAttribute('stroke-linejoin', 'round');
 
     svg.appendChild(path);
 
