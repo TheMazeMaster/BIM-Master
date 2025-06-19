@@ -288,17 +288,12 @@ const overlays = [
     type: "radialGradient",
     radiusRange: [120, 500],
     from: "#ffffff00",
-    to: "#00000033",
-  },
-  // Example radialLines overlay
-  // {
-  //   type: "radialLines",
-  //   angles: [0, 90, 180, 270],
-  //   radius: 500,
-  //   innerRadius: 120,
-  //   color: "#000000"
-  // }
+    to: "#00000033"
+  }
 ];
+
+// `radialLines` overlays draw straight lines from `innerRadius` to `radius`
+// at each angle provided. `innerRadius` defaults to 0 if omitted.
 
 /**
  * EXPORT FULL CONFIG
