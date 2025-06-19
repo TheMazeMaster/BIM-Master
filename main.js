@@ -290,6 +290,39 @@ function drawOverlays(svg, overlays, cx, cy, defs) {
       path.setAttribute('pointer-events', 'none');
       svg.appendChild(path);
     }
+    else if (ov.type === 'ringOutline') {
+      const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      circle.setAttribute('cx', cx);
+      circle.setAttribute('cy', cy);
+      circle.setAttribute('r', ov.radius);
+      circle.setAttribute('fill', 'none');
+      circle.setAttribute('pointer-events', 'none');
+
+      const strokeWidth = ov.width ?? (wheelConfig.renderOptions?.strokeDefaults?.wide || 1);
+
+      circle.setAttribute('stroke', ov.color || '#000');
+      circle.setAttribute('stroke-width', strokeWidth);
+
+      svg.appendChild(circle);
+    }
+    else if (ov.type === 'radialLines') {
+      const outer = ov.radius ?? Math.max(...wheelConfig.tiers.map(t => t.outerRadius));
+      const strokeWidth = ov.width ?? (wheelConfig.renderOptions?.strokeDefaults?.wide || 1);
+
+      (ov.angles || []).forEach(angle => {
+        const start = polarToCartesian(cx, cy, 0, angle);
+        const end = polarToCartesian(cx, cy, outer, angle);
+        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        line.setAttribute('x1', start.x);
+        line.setAttribute('y1', start.y);
+        line.setAttribute('x2', end.x);
+        line.setAttribute('y2', end.y);
+        line.setAttribute('stroke', ov.color || '#000');
+        line.setAttribute('stroke-width', strokeWidth);
+        line.setAttribute('pointer-events', 'none');
+        svg.appendChild(line);
+      });
+    }
   });
 }
 
