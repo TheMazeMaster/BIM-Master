@@ -188,6 +188,7 @@ function drawRadialTier(svg, config, tierIndex, cx, cy, rotationOffset, defs) {
       'A', outer, outer, 0, largeArc, 1, p2.x, p2.y,
       'L', p3.x, p3.y,
       'A', inner, inner, 0, largeArc, 0, p4.x, p4.y,
+      'L', p1.x, p1.y,
       'Z'
     ].join(' ');
 
@@ -237,6 +238,7 @@ function drawRadialTier(svg, config, tierIndex, cx, cy, rotationOffset, defs) {
 
     path.setAttribute('stroke-width', strokeWidth);
     path.setAttribute('stroke-linejoin', 'round');
+    path.setAttribute('stroke-linecap', 'round');
 
     svg.appendChild(path);
 
