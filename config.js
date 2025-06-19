@@ -204,7 +204,7 @@ const tiers = [
       width: renderOptions.strokeDefaults.wide,
       normal: 0.25,
       wide: 1.0,
-      every: 4,
+      every: 1,
       includeFirst: true
     },
     showLabels: true,
