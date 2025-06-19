@@ -25,6 +25,9 @@ const t4Weights = Array(33).fill(4);
 // so deeper tiers can share the exact boundary positions.
 const t4DivisionAngles = weightsToAngles(t4Weights);
 
+// Every fourth division from T4 for wide boundaries
+const wideDivisionAngles = t4DivisionAngles.filter((_, i) => i % 4 === 0);
+
 const renderOptions = {
   rotationStep: 30,
   rotationEnabled: true,
@@ -289,6 +292,13 @@ const overlays = [
     radiusRange: [120, 500],
     from: "#ffffff00",
     to: "#00000033"
+  },
+  {
+    type: "radialLines",
+    innerRadius: 220,
+    radius: 500,
+    angles: wideDivisionAngles,
+    width: renderOptions.strokeDefaults.wide
   }
 ];
 
