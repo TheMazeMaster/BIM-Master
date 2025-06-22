@@ -289,6 +289,14 @@ const overlays = [
     radiusRange: [120, 500],
     from: "#ffffff00",
     to: "#00000033"
+  },
+  {
+    type: "radialLines",
+    angles: [0],
+    innerRadius: 120,
+    radius: 500,
+    width: renderOptions.strokeDefaults.wide,
+    color: "#000"
   }
 ];
 
