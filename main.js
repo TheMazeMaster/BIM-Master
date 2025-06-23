@@ -25,7 +25,7 @@ function renderWheel() {
 
   // Draw any global overlays after tiers
   if (Array.isArray(wheelConfig.overlays)) {
-    drawOverlays(svg, wheelConfig.overlays, centerX, centerY, defs);
+    drawOverlays(svg, wheelConfig.overlays, centerX, centerY, defs, currentRotation);
   }
 
   // Draw tier boundary outlines last so they appear on top
@@ -270,7 +270,7 @@ function drawRadialTier(svg, config, tierIndex, cx, cy, rotationOffset, defs) {
   }
 }
 
-function drawOverlays(svg, overlays, cx, cy, defs) {
+function drawOverlays(svg, overlays, cx, cy, defs, rotationOffset = 0) {
   overlays.forEach((ov, idx) => {
     if (ov.type === 'radialGradient') {
       const gradId = `ov-grad-${idx}`;
@@ -325,10 +325,12 @@ function drawOverlays(svg, overlays, cx, cy, defs) {
       const outer = ov.radius ?? Math.max(...wheelConfig.tiers.map(t => t.outerRadius));
       const inner = ov.innerRadius || 0;
       const strokeWidth = ov.width ?? (wheelConfig.renderOptions?.strokeDefaults?.wide || 1);
+      const rotationAngle = (rotationOffset * 360) / wheelConfig.globalDivisionCount;
 
       (ov.angles || []).forEach(angle => {
-        const start = polarToCartesian(cx, cy, inner, angle);
-        const end = polarToCartesian(cx, cy, outer, angle);
+        const rotated = angle + rotationAngle;
+        const start = polarToCartesian(cx, cy, inner, rotated);
+        const end = polarToCartesian(cx, cy, outer, rotated);
         const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
         line.setAttribute('x1', start.x);
         line.setAttribute('y1', start.y);

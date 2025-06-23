@@ -76,3 +76,4 @@ const overlays = [
 
 // `radialLines` overlays draw straight lines from `innerRadius` to `radius`
 // at each angle provided. `innerRadius` defaults to 0 if omitted.
+// Angles are offset by the wheel's current rotation so lines stay aligned.
