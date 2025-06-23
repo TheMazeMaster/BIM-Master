@@ -295,7 +295,7 @@ const overlays = [
     angles: [0],
     innerRadius: 120,
     radius: 500,
-    width: renderOptions.strokeDefaults.wide,
+    width: renderOptions.strokeDefaults.wide-.3,
     color: "#000"
   }
 ];
