@@ -145,6 +145,7 @@ Optional radial overlay for global gradient (post-MVP)
 Global overlays also support `ringOutline` and `radialLines` types. These accept
 stroke `color`, optional `width` (defaulting to `renderOptions.strokeDefaults.wide`),
 and either a `radius` (for ring outlines) or an `angles` array (for radial lines). `radialLines` may also specify `innerRadius` to start lines away from the center.
+`radialLines` overlays automatically track the wheel's rotation; each angle is offset by the current rotation value.
 
 ✅ MVP Summary
 
