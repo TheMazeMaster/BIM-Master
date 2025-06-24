@@ -177,3 +177,18 @@ python3 -m http.server
 
 Then open [http://localhost:8000/index.html](http://localhost:8000/index.html) in your browser.
 
+
+🧪 Tests
+---------
+A minimal Node.js test suite validates the exported configuration.
+
+### Running the tests
+1. Ensure Node 20 or later is installed.
+2. Install dependencies (none are required beyond Node itself).
+3. Execute:
+
+```bash
+npm test
+```
+
+The script uses `node --test` to run the files in the `test/` directory.
