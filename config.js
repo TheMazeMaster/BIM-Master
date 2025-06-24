@@ -285,12 +285,14 @@ const tiers = [
  */
 const overlays = [
   {
+    visible: true,
     type: "radialGradient",
     radiusRange: [120, 500],
     from: "#ffffff00",
     to: "#00000033"
      },
   {
+    visible: true,
     type: "radialLines",
     angles: [0],
     innerRadius: 120,
