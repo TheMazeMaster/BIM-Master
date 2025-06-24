@@ -28,8 +28,15 @@ function renderWheel() {
     drawOverlays(svg, wheelConfig.overlays, centerX, centerY, defs, currentRotation);
   }
 
-  // Draw tier boundary outlines last so they appear on top
-  drawBoundaries(svg, wheelConfig.tiers, centerX, centerY);
+  // Debug guides for radial divisions
+  if (wheelConfig.renderOptions?.debugGuides) {
+    drawDebugGuides(svg, centerX, centerY, currentRotation);
+  }
+
+  // Draw tier boundary outlines last so they appear on top if enabled
+  if (wheelConfig.renderOptions?.debugRenderOutlines) {
+    drawBoundaries(svg, wheelConfig.tiers, centerX, centerY);
+  }
 }
 
 // === ROTATION BUTTONS ===
@@ -383,6 +390,26 @@ function drawBoundaries(svg, tiers, cx, cy) {
 
     svg.appendChild(circle);
   });
+}
+
+function drawDebugGuides(svg, cx, cy, rotationOffset = 0) {
+  const outer = Math.max(...wheelConfig.tiers.map(t => t.outerRadius));
+  const rotationAngle = (rotationOffset * 360) / wheelConfig.globalDivisionCount;
+
+  for (let i = 0; i < wheelConfig.globalDivisionCount; i++) {
+    const angle = (i / wheelConfig.globalDivisionCount) * 360 + rotationAngle;
+    const start = polarToCartesian(cx, cy, 0, angle);
+    const end = polarToCartesian(cx, cy, outer, angle);
+    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    line.setAttribute('x1', start.x);
+    line.setAttribute('y1', start.y);
+    line.setAttribute('x2', end.x);
+    line.setAttribute('y2', end.y);
+    line.setAttribute('stroke', '#888');
+    line.setAttribute('stroke-width', wheelConfig.renderOptions?.strokeDefaults?.normal || 0.25);
+    line.setAttribute('pointer-events', 'none');
+    svg.appendChild(line);
+  }
 }
 
 function ringPath(cx, cy, inner, outer) {

@@ -24,9 +24,12 @@ rotationStep: Defines snap angle per rotate button (based on 132 divisions)
 
 rotationButtons: Configurable step list, e.g. -20, -3, +3, +20
 
-debugRenderOutlines: Enables outline/stroke rendering for debug
+debugRenderOutlines: When `true`, `main.js` draws thin circle outlines at each tier
+boundary for alignment checks. Disable to hide these debug rings.
 
-debugGuides: Enables internal radial guides for dev use
+debugGuides: When `true`, `main.js` renders radial markers for every
+`globalDivisionCount` slice. These lines rotate with the wheel to show
+current division alignment.
 
 strokeDefaults: Defines normal and wide line width globally
 
