@@ -67,6 +67,7 @@ const renderOptions = {
  */
 const overlays = [
   {
+    visible: true,
     type: "radialGradient",
     radiusRange: [120, 500],
     from: "#ffffff00",
@@ -77,3 +78,5 @@ const overlays = [
 // `radialLines` overlays draw straight lines from `innerRadius` to `radius`
 // at each angle provided. `innerRadius` defaults to 0 if omitted.
 // Angles are offset by the wheel's current rotation so lines stay aligned.
+// Set `visible: false` on any overlay object to hide it without removing the
+// configuration entry.

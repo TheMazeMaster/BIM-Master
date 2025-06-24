@@ -272,6 +272,7 @@ function drawRadialTier(svg, config, tierIndex, cx, cy, rotationOffset, defs) {
 
 function drawOverlays(svg, overlays, cx, cy, defs, rotationOffset = 0) {
   overlays.forEach((ov, idx) => {
+    if (ov.visible === false) return;
     if (ov.type === 'radialGradient') {
       const gradId = `ov-grad-${idx}`;
       const grad = document.createElementNS('http://www.w3.org/2000/svg', 'radialGradient');
