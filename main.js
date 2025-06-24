@@ -268,6 +268,23 @@ function drawRadialTier(svg, config, tierIndex, cx, cy, rotationOffset, defs) {
       svg.appendChild(text);
     }
   }
+
+  // Apply optional overlay effect across the entire tier
+  if (config.overlay && config.overlay.visible !== false) {
+    const overlayPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    overlayPath.setAttribute('d', ringPath(cx, cy, config.innerRadius, config.outerRadius));
+    overlayPath.setAttribute('fill', config.overlay.color || (config.overlay.mode === 'shade' ? '#000' : '#fff'));
+    overlayPath.setAttribute('fill-opacity', config.overlay.strength ?? 0.25);
+    overlayPath.setAttribute('pointer-events', 'none');
+
+    if (config.overlay.mode === 'shade') {
+      overlayPath.style.mixBlendMode = 'multiply';
+    } else if (config.overlay.mode === 'tint') {
+      overlayPath.style.mixBlendMode = 'screen';
+    }
+
+    svg.appendChild(overlayPath);
+  }
 }
 
 function drawOverlays(svg, overlays, cx, cy, defs, rotationOffset = 0) {
