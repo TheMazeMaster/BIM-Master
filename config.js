@@ -236,11 +236,7 @@ const tiers = [
     },
     stroke: {
       show: true,
-      width: renderOptions.strokeDefaults.wide,
-      normal: 0.25,
-      wide: 1.0,
-      every: 4,
-      includeFirst: true
+      width: renderOptions.strokeDefaults.normal
     },
     showLabels: true,
     visible: true
@@ -269,11 +265,7 @@ const tiers = [
     },
     stroke: {
       show: true,
-      width: renderOptions.strokeDefaults.wide,
-      normal: 0.25,
-      wide: 1.0,
-      every: 4,
-      includeFirst: true
+      width: renderOptions.strokeDefaults.normal
     },
     showLabels: true,
     visible: true
