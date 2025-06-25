@@ -76,6 +76,8 @@ includeFirst: Ensures first line is always drawn
 
 No stroke logic is inferred — full visual control
 
+T5 and T6 use the `normal` stroke width across all 132 boundaries.
+
 🎛️ Fill Modes
 
 solid: Flat fill

@@ -43,6 +43,8 @@ const tiers = [
   },
 
   // T1 - T6 remain as before, to be updated next...
+  // T5 and T6 now draw thin boundaries using `strokeDefaults.normal` on every
+  // segment.
 ];
 
 /**
