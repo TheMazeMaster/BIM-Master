@@ -14,15 +14,11 @@ Rendering Order: T0 → T6
 
 Draw Logic: Center-out, non-overlapping SVG segments
 
-Rotation: Optional; user-controlled with multiple step options
+Rotation: Optional; user-controlled via buttons
 
 🔧 Global Config Controls
 
 globalDivisionCount: Total radial slices (132)
-
-rotationStep: Defines snap angle per rotate button (based on 132 divisions)
-
-rotationButtons: Configurable step list, e.g. -20, -3, +3, +20
 
 debugRenderOutlines: When `true`, `main.js` draws thin circle outlines at each tier
 boundary for alignment checks. Disable to hide these debug rings.
@@ -129,11 +125,9 @@ Each T6 state maps 1:1 with existing 132 segment structure
 
 Rotation is optional, included in MVP
 
-Rotation step values can be any integer from 1 to 132
-
-Suggested default: -20, -3, +3, +20
-
-All tiers (except T0–T2) rotate together
+Rotation buttons in `index.html` increment or decrement the wheel in
+fixed steps. All tiers (except T0–T2) rotate together
+and track the current rotation angle.
 
 T0–T2 have rotationLocked: true
 

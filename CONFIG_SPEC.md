@@ -51,8 +51,6 @@ const tiers = [
  * GLOBAL OPTIONS
  */
 const renderOptions = {
-  rotationStep: 30,
-  rotationEnabled: true,
   debugGuides: false,
   debugRenderOutlines: true,
   strokeDefaults: {
