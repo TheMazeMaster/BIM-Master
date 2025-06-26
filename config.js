@@ -26,8 +26,6 @@ const t4Weights = Array(33).fill(4);
 const t4DivisionAngles = weightsToAngles(t4Weights);
 
 const renderOptions = {
-  rotationStep: 30,
-  rotationEnabled: true,
   debugGuides: false,
   debugRenderOutlines: true,
   strokeDefaults: {
