@@ -25,6 +25,9 @@ const t4Weights = Array(33).fill(4);
 // so deeper tiers can share the exact boundary positions.
 const t4DivisionAngles = weightsToAngles(t4Weights);
 
+// Angles for each of the 33 primary T4 segments
+const t4SegmentAngles = t4DivisionAngles.filter((_, i) => i % 4 === 0);
+
 const renderOptions = {
   debugGuides: false,
   debugRenderOutlines: true,
@@ -284,7 +287,7 @@ const overlays = [
   {
     visible: true,
     type: "radialLines",
-    angles: [0],
+    angles: t4SegmentAngles,
     innerRadius: 120,
     radius: 500,
     width: renderOptions.strokeDefaults.wide-.3,
