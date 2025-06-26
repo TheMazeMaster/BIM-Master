@@ -229,23 +229,8 @@ function drawRadialTier(svg, config, tierIndex, cx, cy, rotationOffset, defs) {
       segmentFill = config.fill.colors[i];
     }
     path.setAttribute('fill', segmentFill);
-    path.setAttribute('stroke', config.stroke?.show ? '#000' : 'none');
-
-    const normalWidth = config.stroke?.normal ??
-      (wheelConfig.renderOptions?.strokeDefaults?.normal || 0.25);
-    const wideWidth = config.stroke?.wide ?? config.stroke?.width ??
-      (wheelConfig.renderOptions?.strokeDefaults?.wide || normalWidth);
-
-    let strokeWidth = normalWidth;
-    if (typeof config.stroke?.every === 'number') {
-      const onPattern = (i % config.stroke.every === 0) &&
-        (config.stroke.includeFirst || i !== 0);
-      strokeWidth = onPattern ? wideWidth : normalWidth;
-    }
-
-    path.setAttribute('stroke-width', strokeWidth);
-    path.setAttribute('stroke-linejoin', 'round');
-    path.setAttribute('stroke-linecap', 'round');
+    // Cell boundaries are now drawn via overlays, not per-path strokes
+    path.setAttribute('stroke', 'none');
 
     svg.appendChild(path);
 
