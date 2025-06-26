@@ -179,15 +179,6 @@ Then open [http://localhost:8000/index.html](http://localhost:8000/index.html) i
 
 🧪 Tests
 ---------
-A minimal Node.js test suite validates the exported configuration.
-
-### Running the tests
-1. Ensure Node 20 or later is installed.
-2. Install dependencies (none are required beyond Node itself).
-3. Execute:
-
-```bash
-npm test
-```
-
-The script uses `node --test` to run the files in the `test/` directory.
+There are currently no automated tests for this project.
+The `npm test` script is intentionally empty and exists only to
+prevent errors when running `npm test`.
