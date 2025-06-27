@@ -21,9 +21,27 @@ function weightsToAngles(weights) {
 // Base weights for T4 (33 segments × 4 divisions)
 const t4Weights = Array(33).fill(4);
 
+// Base weights for T3 (10 segments with variable widths)
+const t3Weights = [20, 12, 12, 12, 12, 12, 12, 12, 12, 16];
+
+// Starting angle of each T3 segment
+const t3SegmentAngles = (() => {
+  const step = 360 / globalDivisionCount;
+  const angles = [];
+  let index = 0;
+  for (const weight of t3Weights) {
+    angles.push(index * step);
+    index += weight;
+  }
+  return angles;
+})();
+
 // Derive the starting angle of each of the 132 global divisions from T4
 // so deeper tiers can share the exact boundary positions.
 const t4DivisionAngles = weightsToAngles(t4Weights);
+
+// Angles for each of the 33 primary T4 segments
+const t4SegmentAngles = t4DivisionAngles.filter((_, i) => i % 4 === 0);
 
 const renderOptions = {
   debugGuides: false,
@@ -280,11 +298,20 @@ const overlays = [
     radiusRange: [120, 500],
     from: "#ffffff00",
     to: "#00000033"
-     },
+  },
   {
     visible: true,
     type: "radialLines",
-    angles: [0],
+    angles: t3SegmentAngles,
+    innerRadius: 60,
+    radius: 500,
+    width: renderOptions.strokeDefaults.wide - .3,
+    color: "#000"
+  },
+  {
+    visible: true,
+    type: "radialLines",
+    angles: t4SegmentAngles,
     innerRadius: 120,
     radius: 500,
     width: renderOptions.strokeDefaults.wide-.3,
