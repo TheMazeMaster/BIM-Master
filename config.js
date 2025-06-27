@@ -289,6 +289,20 @@ const tiers = [
   }
 ];
 
+// Angles for T5 sub-division lines (based on T5 weights)
+const t5Angles = (() => {
+  const weights = tiers[5].divisionWeights;
+  const total = weights.reduce((a, b) => a + b, 0);
+  let sum = 0;
+  return weights.map(w => {
+    sum += w;
+    return (sum / total) * 360;
+  });
+})();
+
+// Skip every 4th T5 angle to avoid duplicate T4 boundaries
+const filteredT5 = t5Angles.filter((_, i) => (i + 1) % 4 !== 0);
+
 /**
  * OVERLAYS (Optional)
  */
@@ -316,6 +330,15 @@ const overlays = [
     innerRadius: 120,
     radius: 500,
     width: renderOptions.strokeDefaults.wide-.3,
+    color: "#000"
+  },
+  {
+    visible: true,
+    type: "radialLines",
+    angles: filteredT5,
+    innerRadius: tiers[5].innerRadius,
+    radius: tiers[6].outerRadius,
+    width: renderOptions.strokeDefaults.normal,
     color: "#000"
   }
 ];
