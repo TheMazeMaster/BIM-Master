@@ -253,7 +253,7 @@ const tiers = [
     },
     stroke: {
       show: true,
-      width: renderOptions.strokeDefaults.normal
+      width: renderOptions.strokeDefaults.wide
     },
     showLabels: true,
     visible: true
@@ -282,7 +282,7 @@ const tiers = [
     },
     stroke: {
       show: true,
-      width: renderOptions.strokeDefaults.normal
+      width: renderOptions.strokeDefaults.wide
     },
     showLabels: true,
     visible: true
@@ -340,6 +340,20 @@ const overlays = [
     radius: tiers[6].outerRadius,
     width: renderOptions.strokeDefaults.normal,
     color: "#000"
+  },
+  {
+    visible: true,
+    type: 'ringOutline',
+    radius: 250,
+    width: renderOptions.strokeDefaults.wide,
+    color: '#000'
+  },
+  {
+    visible: true,
+    type: 'ringOutline',
+    radius: 500,
+    width: renderOptions.strokeDefaults.wide,
+    color: '#000'
   }
 ];
 
