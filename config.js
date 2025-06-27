@@ -28,6 +28,22 @@ const t4DivisionAngles = weightsToAngles(t4Weights);
 // Angles for each of the 33 primary T4 segments
 const t4SegmentAngles = t4DivisionAngles.filter((_, i) => i % 4 === 0);
 
+// Tier 3 weights (10 instinct blocks)
+const t3Weights = [20, 12, 12, 12, 12, 12, 12, 12, 12, 16];
+
+// Angles marking the start of each T3 block
+const t3Angles = (() => {
+  const total = t3Weights.reduce((a, b) => a + b, 0);
+  const angles = [];
+  let sum = 0;
+  const step = 360 / total;
+  t3Weights.forEach(w => {
+    angles.push(sum * step);
+    sum += w;
+  });
+  return angles;
+})();
+
 const renderOptions = {
   debugGuides: false,
   debugRenderOutlines: true,
@@ -284,6 +300,15 @@ const overlays = [
     from: "#ffffff00",
     to: "#00000033"
      },
+  {
+    visible: true,
+    type: "radialLines",
+    angles: t3Angles,
+    innerRadius: 60,
+    radius: tiers[3].outerRadius,
+    width: renderOptions.strokeDefaults.wide - 0.3,
+    color: "#000"
+  },
   {
     visible: true,
     type: "radialLines",
