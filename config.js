@@ -28,6 +28,22 @@ const t4DivisionAngles = weightsToAngles(t4Weights);
 // Angles for each of the 33 primary T4 segments
 const t4SegmentAngles = t4DivisionAngles.filter((_, i) => i % 4 === 0);
 
+// Tier 3 weights (10 instinct blocks)
+const t3Weights = [20, 12, 12, 12, 12, 12, 12, 12, 12, 16];
+
+// Angles marking the start of each T3 block
+const t3Angles = (() => {
+  const total = t3Weights.reduce((a, b) => a + b, 0);
+  const angles = [];
+  let sum = 0;
+  const step = 360 / total;
+  t3Weights.forEach(w => {
+    angles.push(sum * step);
+    sum += w;
+  });
+  return angles;
+})();
+
 const renderOptions = {
   debugGuides: false,
   debugRenderOutlines: true,
@@ -273,6 +289,20 @@ const tiers = [
   }
 ];
 
+// Angles for T5 sub-division lines (based on T5 weights)
+const t5Angles = (() => {
+  const weights = tiers[5].divisionWeights;
+  const total = weights.reduce((a, b) => a + b, 0);
+  let sum = 0;
+  return weights.map(w => {
+    sum += w;
+    return (sum / total) * 360;
+  });
+})();
+
+// Skip every 4th T5 angle to avoid duplicate T4 boundaries
+const filteredT5 = t5Angles.filter((_, i) => (i + 1) % 4 !== 0);
+
 /**
  * OVERLAYS (Optional)
  */
@@ -287,10 +317,28 @@ const overlays = [
   {
     visible: true,
     type: "radialLines",
+    angles: t3Angles,
+    innerRadius: 60,
+    radius: tiers[3].outerRadius,
+    width: renderOptions.strokeDefaults.wide - 0.3,
+    color: "#000"
+  },
+  {
+    visible: true,
+    type: "radialLines",
     angles: t4SegmentAngles,
     innerRadius: 120,
     radius: 500,
     width: renderOptions.strokeDefaults.wide-.3,
+    color: "#000"
+  },
+  {
+    visible: true,
+    type: "radialLines",
+    angles: filteredT5,
+    innerRadius: tiers[5].innerRadius,
+    radius: tiers[6].outerRadius,
+    width: renderOptions.strokeDefaults.normal,
     color: "#000"
   }
 ];
