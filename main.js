@@ -210,10 +210,14 @@ function drawRadialTier(svg, config, tierIndex, cx, cy, rotationOffset, defs) {
         const gradId = `grad-${tierIndex}-${i}`;
         const grad = document.createElementNS('http://www.w3.org/2000/svg', 'linearGradient');
         grad.setAttribute('id', gradId);
-        grad.setAttribute('x1', '0%');
-        grad.setAttribute('y1', '0%');
-        grad.setAttribute('x2', '0%');
-        grad.setAttribute('y2', '100%');
+        const midAngle = (startAngle + endAngle) / 2;
+        const innerPt = polarToCartesian(cx, cy, inner, midAngle);
+        const outerPt = polarToCartesian(cx, cy, outer, midAngle);
+        grad.setAttribute('gradientUnits', 'userSpaceOnUse');
+        grad.setAttribute('x1', innerPt.x);
+        grad.setAttribute('y1', innerPt.y);
+        grad.setAttribute('x2', outerPt.x);
+        grad.setAttribute('y2', outerPt.y);
         const stop1 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
         stop1.setAttribute('offset', '0%');
         stop1.setAttribute('stop-color', pair[0]);
