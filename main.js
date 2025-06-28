@@ -5,9 +5,11 @@ import { wheelData } from './wheelData.js';
 
 const svg = document.getElementById('dim-wheel');
 let currentRotation = 0;
+let arcPathCounter = 0;
 
 // === RENDER ENTRY POINT ===
 function renderWheel() {
+  arcPathCounter = 0;
   svg.innerHTML = ''; // Clear canvas
   const centerX = wheelConfig.centerX;
   const centerY = wheelConfig.centerY;
@@ -105,7 +107,7 @@ function drawCenteredText(svg, config, cx, cy) {
 
 function drawArcText(svg, config, cx, cy) {
   const radius = (config.outerRadius + config.innerRadius) / 2 + (config.radiusOffset || 0);
-  const pathId = `arcPath-${Math.random().toString(36).substr(2, 9)}`;
+  const pathId = `arcPath-${arcPathCounter++}`;
 
   const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
   const startAngle = 0;
