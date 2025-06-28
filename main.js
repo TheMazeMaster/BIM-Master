@@ -211,8 +211,11 @@ function drawRadialTier(svg, config, tierIndex, cx, cy, rotationOffset, defs) {
         const grad = document.createElementNS('http://www.w3.org/2000/svg', 'linearGradient');
         grad.setAttribute('id', gradId);
         const midAngle = (startAngle + endAngle) / 2;
-        const innerPt = polarToCartesian(cx, cy, inner, midAngle);
-        const outerPt = polarToCartesian(cx, cy, outer, midAngle);
+        // Rotate the gradient direction so it radiates outward along the
+        // wedge centerline. We offset by 90° to account for the polar
+        // coordinate orientation used in the drawing functions.
+        const innerPt = polarToCartesian(cx, cy, inner, midAngle + 90);
+        const outerPt = polarToCartesian(cx, cy, outer, midAngle + 90);
         grad.setAttribute('gradientUnits', 'userSpaceOnUse');
         grad.setAttribute('x1', innerPt.x);
         grad.setAttribute('y1', innerPt.y);
