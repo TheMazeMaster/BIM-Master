@@ -212,15 +212,14 @@ function drawRadialTier(svg, config, tierIndex, cx, cy, rotationOffset, defs) {
         const gradId = `grad-${tierIndex}-${i}`;
         const grad = document.createElementNS('http://www.w3.org/2000/svg', 'linearGradient');
         grad.setAttribute('id', gradId);
-        const midAngle = (startAngle + endAngle) / 2;
-        //  
-        const innerPt = polarToCartesian(cx, cy, inner, midAngle);
-        const outerPt = polarToCartesian(cx, cy, outer, midAngle);
+        const midRadius = (inner + outer) / 2;
+        const startPt = polarToCartesian(cx, cy, midRadius, startAngle);
+        const endPt = polarToCartesian(cx, cy, midRadius, endAngle);
         grad.setAttribute('gradientUnits', 'userSpaceOnUse');
-        grad.setAttribute('x1', innerPt.x);
-        grad.setAttribute('y1', innerPt.y);
-        grad.setAttribute('x2', outerPt.x);
-        grad.setAttribute('y2', outerPt.y);
+        grad.setAttribute('x1', startPt.x);
+        grad.setAttribute('y1', startPt.y);
+        grad.setAttribute('x2', endPt.x);
+        grad.setAttribute('y2', endPt.y);
         const stop1 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
         stop1.setAttribute('offset', '0%');
         stop1.setAttribute('stop-color', pair[0]);
@@ -231,6 +230,39 @@ function drawRadialTier(svg, config, tierIndex, cx, cy, rotationOffset, defs) {
         grad.appendChild(stop2);
         defs.appendChild(grad);
         segmentFill = `url(#${gradId})`;
+      }
+    } else if (config.fill?.mode === 'inherit' && tierIndex > 0) {
+      let srcIndex = tierIndex - 1;
+      let srcTier = wheelConfig.tiers[srcIndex];
+      while (srcTier && srcTier.fill?.mode === 'inherit' && srcIndex > 0) {
+        srcIndex -= 1;
+        srcTier = wheelConfig.tiers[srcIndex];
+      }
+      const srcPair = srcTier.fill?.gradientPairs?.[i];
+      if (srcPair && defs) {
+        const gradId = `grad-${tierIndex}-${i}`;
+        const grad = document.createElementNS('http://www.w3.org/2000/svg', 'linearGradient');
+        grad.setAttribute('id', gradId);
+        const midRadius = (inner + outer) / 2;
+        const startPt = polarToCartesian(cx, cy, midRadius, startAngle);
+        const endPt = polarToCartesian(cx, cy, midRadius, endAngle);
+        grad.setAttribute('gradientUnits', 'userSpaceOnUse');
+        grad.setAttribute('x1', startPt.x);
+        grad.setAttribute('y1', startPt.y);
+        grad.setAttribute('x2', endPt.x);
+        grad.setAttribute('y2', endPt.y);
+        const stop1 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+        stop1.setAttribute('offset', '0%');
+        stop1.setAttribute('stop-color', srcPair[0]);
+        const stop2 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+        stop2.setAttribute('offset', '100%');
+        stop2.setAttribute('stop-color', srcPair[1]);
+        grad.appendChild(stop1);
+        grad.appendChild(stop2);
+        defs.appendChild(grad);
+        segmentFill = `url(#${gradId})`;
+      } else if (srcTier.fill?.colorList) {
+        segmentFill = srcTier.fill.colorList[i] || segmentFill;
       }
     } else if (config.fill?.colors?.[i]) {
       segmentFill = config.fill.colors[i];
